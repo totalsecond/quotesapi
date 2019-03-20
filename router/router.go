@@ -8,9 +8,10 @@ import (
 	//"log"
 )
 
-func setupRouter() *gin.Engine {
+// SetupRouter configures our router
+func SetupRouter() *gin.Engine {
 	r := gin.Default()
-	r.Use(favicon.New("./favicon.ico"))
+	r.Use(favicon.New("./views/favicon.ico"))
 	r.Use(static.Serve("/", static.LocalFile("./views", true)))
 
 	rbcp := r.Group("/quotes/rbcp")
@@ -21,9 +22,4 @@ func setupRouter() *gin.Engine {
 		rbcp.POST("/:quoteID/downvote", handler.PostDownvote)
 	}
 	return r
-}
-
-func Start() {
-	router := setupRouter()
-	router.Run(":8080")
 }
